@@ -63,6 +63,30 @@ app.delete("/pothole/:id", async (req, res) => {
   res.send("done");
 });
 
+// new route
+
+const kmToRadian = (km) => {
+  const earthRadiusInKm = 6378;
+  return km / earthRadiusInKm;
+};
+
+app.get("/potholeByDistance", async (req, res) => {
+  const { lat, long } = req.query;
+  const distance = 0.1;
+
+  const query = {
+    location: {
+      $geoWithin: {
+        $centerSphere: [[long, lat], kmToRadian(distance)],
+      },
+    },
+  };
+
+  const pothole = await Pothole.find(query);
+
+  res.send(pothole);
+});
+
 app.listen(3000, () => {
   console.log("APP IS LISTENING ON PORT 3000!");
 });
