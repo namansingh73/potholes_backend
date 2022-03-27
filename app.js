@@ -7,6 +7,8 @@ const dotenv = require("dotenv");
 const Pothole = require("./location");
 const bodyParser = require("body-parser");
 
+const cors = require("cors");
+app.use(cors());
 dotenv.config({ path: "./config.env" });
 
 const DB = process.env.DATABASE.replace(
