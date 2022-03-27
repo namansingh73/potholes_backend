@@ -20,7 +20,7 @@ const potholeSchema = new mongoose.Schema({
       required: true,
     },
   },
-  area: {
+  frequency: {
     type: Number,
     required: true,
     min: 0,
